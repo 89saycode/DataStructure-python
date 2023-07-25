@@ -99,3 +99,93 @@ def parChecker(symbolString):
 
 parChecker("((()))")
 ```
+
+## 队列
+
+### 什么是队列?
+
+队列是有序集合，添加操作发生在“尾部”，移出操作发生在“头部”。排序的原则是: FIFI (first-in first-out) 先进先出。
+
+如图所示:
+![队列图](media/16902965487867/%E9%98%9F%E5%88%97%E5%9B%BE.png)
+### 队列中相应方法
+- Queue() 创建一个空队列。
+- enqueue(item) 在队列尾部添加一个元素。
+- dequeue() 从队列头部移出一个元素。
+- isEmpty() 检查队列是否为空。
+- size() 返回队列中元素的数目。
+
+### 代码实现
+```python
+class Queue:
+    def __init__(self):
+        """
+            初始化队列
+        """
+        
+        self.items = []  
+
+    def isEmpty(self):
+        """
+            检查队列是否为空
+        """
+        
+        return self.items == []
+
+    def enqueue(self, item):
+        """
+            在队列尾部添加一个元素
+            :param item  元素
+        """
+        
+        self.items.insert(0, item)
+
+    def dequeue(self):
+        """
+            从队列头部移出一个元素
+        """
+        return self.items.pop()
+
+    def size(self):
+        """
+            返回队列中元素的数目
+        """
+        
+        return len(self.items)
+```
+
+### 相关题目
+#### 六人传手雷游戏
+六个人顺序传递手雷，传递到某人时，手雷将会爆炸，这个人也就死了，返回最后的胜利者。
+
+![IMG_CE58B9F52DC8-1](media/16902965487867/IMG_CE58B9F52DC8-1.jpeg)
+
+思路: 程序需要两个参数， 一个参数是 名字列表 "nameList" 和 一个爆炸计数常量 "num" (手雷在什么时候爆炸)。
+
+```python
+def transferGrenade(nameList, num):
+    """
+        :param nameList 名字列表
+        :param num      计数常量
+    """
+    queue = Queue()  # 创建一个空队列
+
+    for name in nameList:       # 遍历名字列表
+        queue.enqueue(name)     # 添加到队列当中
+
+    while queue.size() > 1:
+        for i in range(num):    # 遍历传入计数常量次数
+        
+             # 移除一个名字元素，并且添加队尾
+            queue.enqueue(queue.dequeue())  
+            
+        # 手雷爆炸，移除一个名字元素
+        queue.dequeue()        
+    return queue.dequeue()      # 返回最后一个名字元素
+
+
+if __name__ == '__main__':
+    name = transferGrenade(
+    ["张三", "李四", "王五", "周六", "赵七", "孙八"], 5)
+    print(name) # 周六
+```
