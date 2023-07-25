@@ -107,7 +107,7 @@ parChecker("((()))")
 队列是有序集合，添加操作发生在“尾部”，移出操作发生在“头部”。排序的原则是: FIFI (first-in first-out) 先进先出。
 
 如图所示:
-![队列图](media/16902965487867/%E9%98%9F%E5%88%97%E5%9B%BE.png)
+![](https://github.com/89saycode/DataStructure-python/blob/main/images/%25E9%2598%259F%25E5%2588%2597%25E5%259B%25BE.png)
 ### 队列中相应方法
 - Queue() 创建一个空队列。
 - enqueue(item) 在队列尾部添加一个元素。
