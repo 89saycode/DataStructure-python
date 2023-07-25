@@ -31,31 +31,39 @@ n = [4, 3, 2, 1, 0]
 ```python
 class Stack:
     def __init__(self):
-        self.items = []     # 初始化空栈
+        """
+            初始化空栈
+        """
+        
+        self.items = []
 
-    '''
-        检查栈是否为空
-    '''
     def isEmpty(self):
+        """
+            检查栈是否为空
+        """
+        
         return self.items == []
 
-    '''
-        将一个元素添加到栈的顶端
-    '''
     def push(self, item):
+        """
+            将一个元素添加到栈的顶端
+            :param item 元素
+        """
+        
         self.items.append(item)
-        # self.items.insert(0, item) 慢
-
-    '''
-        将栈顶端的元素移出
-    '''
+        
     def pop(self):
+        """
+            将栈顶端的元素移出
+        """
+            
         return self.items.pop()
 
-    '''
-        返回栈顶端的元素，并不是移出该元素
-    '''
     def peek(self):
+        """
+            返回栈顶端的元素，并不是移出该元素
+        """
+        
         return self.item[len(self.items) - 1]
 
     '''
@@ -76,6 +84,10 @@ class Stack:
 
 ```python
 def parChecker(symbolString):
+    """
+        :param symbolString 符号字符串
+    """
+    
     s = Stack()  # 创建一个栈
     balanced = True  # 保持括号平衡
     index = 0  # 下标
