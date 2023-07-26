@@ -201,3 +201,114 @@ if __name__ == '__main__':
     ["张三", "李四", "王五", "周六", "赵七", "孙八"], 5)
     print(name) # 周六
 ```
+
+## 双端队列
+
+### 什么是双端队列?
+
+双端队列是与队列类似的有序集合，它有一前，一后两端，元素在哪一段添加和移除元素都没有任何问题。排序的原则是: 取决于使用者。
+
+### 队列中相应方法
+- Queue() 创建一个空双端队列。
+- addFront(item) 将一个元素添加到双端队列的前端。
+- addRear(item) 将一个元素添加到双端队列的后端。
+- removeFront() 从双端队列的前端移除一个元素。
+- removeRear() 从双端队列的后端移除一个元素。
+- isEmpty() 检查双端队列是否为空。
+- size() 返回双端队列中元素的数目。
+
+### 代码实现
+```python
+class Deque:
+    def __init__(self):
+        """
+            初始化双端队列
+        """
+        
+        self.items = []  
+
+    def isEmpty(self):
+        """
+            检查双端队列是否为空
+        """
+        
+        return self.items == []
+
+    def addFront(self, item):
+        """
+            在双端队列前端添加一个元素
+            :param item  元素
+        """
+        
+        self.items.append(item)
+        
+    def addRear(self, item):
+        """
+            在双端队列后端添加一个元素
+            :param item  元素
+        """
+        
+        self.items.insert(0, item)
+    
+    def removeFront(self):
+        """
+            从双端队列前端移出一个元素
+        """
+        return self.items.pop()
+    
+     def removeRear(self):
+        """
+            从双端队列后端移出一个元素
+        """
+        return self.items.pop(0)
+
+    def size(self):
+        """
+            返回双端队列中元素的数目
+        """
+        
+        return len(self.items)
+```
+
+### 相关题目
+#### 回文问题
+回文问题是指从前往后和从后往前读都一样的字符串，例如oppo、toot等。
+
+思路: 使用双端队列来存储字符串中的字符。按从左往右的顺序将字符串中的字符添加到双端队列的后端。利用双端队列的双重性，前端是字符串的第一个字符，后端是字符串的最后一个字符。
+
+```python
+def palChecker(aString):
+    """
+        :param aString 要判断回文的字符串
+    """
+
+    charDeque = Deque()         # 创建双端队列
+
+    for ch in aString:
+        # 将字符添加到双端队列前端
+        charDeque.addRear(ch)
+
+    stillEqual = True  # 相等 默认True
+
+    while charDeque.size() > 1 and stillEqual:
+        # 移除一个双端队列前端元素
+        firstChar = charDeque.removeFront()
+        # 移除一个双端队列后端元素
+        lastChar = charDeque.removeRear()
+
+        # 如果前后两个字符不相等
+        if firstChar != lastChar:
+            # 相等变为 False
+            stillEqual = Fasle
+
+    return stillEqual
+
+
+if __name__ == '__main__':
+    stillEqual = palChecker("tooppoot")
+
+    if stillEqual:
+        print("是回文")
+    else:
+        print("不是回文")
+```
